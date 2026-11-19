@@ -25,6 +25,31 @@ CrumbCo.normalizeProductCategory = (category) => {
   return "pastry";
 };
 
+CrumbCo.productImageFallback = (category) => {
+  const imageCategory = CrumbCo.productCategories[category]
+    ? category
+    : "pastry";
+  return `/static/images/products/${imageCategory}.jpg`;
+};
+
+CrumbCo.productImageMarkup = (url, category, alt = "") => {
+  const fallback = CrumbCo.productImageFallback(category);
+  return `<img src="${CrumbCo.escapeHtml(url || fallback)}" data-fallback="${fallback}" alt="${CrumbCo.escapeHtml(alt)}">`;
+};
+
+CrumbCo.applyProductImageFallbacks = (root) => {
+  root.querySelectorAll("img[data-fallback]").forEach((image) => {
+    image.addEventListener("error", () => {
+      if (image.dataset.fallbackApplied) {
+        image.hidden = true;
+        return;
+      }
+      image.dataset.fallbackApplied = "true";
+      image.src = image.dataset.fallback;
+    });
+  });
+};
+
 CrumbCo.apiBase = (
   window.CrumbCoConfig?.apiBaseUrl || "/api"
 ).replace(/\/+$/, "");

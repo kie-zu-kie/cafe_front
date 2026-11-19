@@ -10,8 +10,17 @@ CrumbCo.renderOrders = (list = CrumbCo.orders) => {
     order.item_details?.length
       ? `<div class="order-product-list">${order.item_details
           .map(
-            (item) =>
-              `<span class="order-product">${item.image_url ? `<img src="${item.image_url}" alt="${item.name}">` : `<span class="order-product-placeholder">${item.emoji || "🍰"}</span>`}<span>${item.name} × ${item.quantity}</span></span>`,
+            (item) => {
+              const product = CrumbCo.products.find(
+                (candidate) => candidate.name === item.name,
+              );
+              const image = CrumbCo.productImageMarkup(
+                item.image_url,
+                product?.category,
+                item.name,
+              );
+              return `<span class="order-product">${image}<span>${item.name} × ${item.quantity}</span></span>`;
+            },
           )
           .join("")}</div>`
       : order.items;
@@ -25,6 +34,8 @@ CrumbCo.renderOrders = (list = CrumbCo.orders) => {
         `<tr><td><strong>${order.id}</strong></td><td>${order.customer}</td><td>${itemDetails(order)}</td><td><strong>${order.total}</strong></td><td>${statusControl(order)}</td></tr>`,
     )
     .join("");
+  CrumbCo.applyProductImageFallbacks(CrumbCo.$("#orders-table"));
+  CrumbCo.applyProductImageFallbacks(CrumbCo.$("#recent-orders"));
 };
 
 CrumbCo.initOrders = () => {
@@ -125,24 +136,28 @@ CrumbCo.initOrders = () => {
         .map((product) => {
           const category = CrumbCo.productCategories[product.category] ||
             CrumbCo.productCategories.pastry;
-          const image = product.image_url
-            ? `<img src="${escapeHtml(product.image_url)}" alt="">`
-            : `<span aria-hidden="true">${escapeHtml(product.emoji || category.emoji)}</span>`;
+          const image = CrumbCo.productImageMarkup(
+            product.image_url,
+            product.category,
+          );
           return `<button class="order-product-card" type="button" data-product-id="${escapeHtml(product.id)}"><span class="order-product-image ${escapeHtml(category.image)}">${image}<span class="order-product-add" aria-hidden="true">+</span></span><span class="order-product-card-name">${escapeHtml(product.name)}</span><span class="order-product-card-footer"><strong>${escapeHtml(product.price)}</strong><span>Add to order</span></span></button>`;
         })
         .join("") ||
       `<p class="order-catalog-empty">${CrumbCo.products.length ? "No products match your search." : "No products are available yet."}</p>`;
+    CrumbCo.applyProductImageFallbacks(productGrid);
   };
   const addItemRow = (product) => {
     const row = document.createElement("div");
     row.className = "order-item-row";
     const category = CrumbCo.productCategories[product.category] ||
       CrumbCo.productCategories.pastry;
-    const image = product.image_url
-      ? `<img src="${escapeHtml(product.image_url)}" alt="">`
-      : `<span aria-hidden="true">${escapeHtml(product.emoji || category.emoji)}</span>`;
+    const image = CrumbCo.productImageMarkup(
+      product.image_url,
+      product.category,
+    );
     row.innerHTML = `<input class="order-item" type="hidden" value="${escapeHtml(product.name)}" data-price="${productPrice(product)}"><div class="order-cart-item"><span class="order-cart-item-image">${image}</span><span class="order-cart-item-details"><strong>${escapeHtml(product.name)}</strong><small>${escapeHtml(product.price)}</small></span></div><div class="order-quantity-controls"><button class="order-quantity-button" type="button" data-quantity-change="-1" aria-label="Remove one ${escapeHtml(product.name)}">−</button><input class="order-quantity" type="number" min="1" max="99" value="1" required aria-label="Quantity of ${escapeHtml(product.name)}"><button class="order-quantity-button" type="button" data-quantity-change="1" aria-label="Add one ${escapeHtml(product.name)}">+</button></div>`;
     itemsContainer.appendChild(row);
+    CrumbCo.applyProductImageFallbacks(row);
   };
   CrumbCo.addOrderItem = (productOrName) => {
     const product =

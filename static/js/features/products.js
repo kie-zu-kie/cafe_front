@@ -27,9 +27,11 @@ CrumbCo.renderProducts = (list = CrumbCo.products) => {
             const categoryMeta =
               CrumbCo.productCategories[product.category] ||
               CrumbCo.productCategories.pastry;
-            const imageContent = product.image_url
-              ? `<img src="${CrumbCo.escapeHtml(product.image_url)}" alt="${CrumbCo.escapeHtml(product.name)}">`
-              : categoryMeta.emoji;
+            const imageContent = CrumbCo.productImageMarkup(
+              product.image_url,
+              product.category,
+              product.name,
+            );
             const productId = CrumbCo.escapeHtml(product.id);
             const managerActions = isManager
               ? `<button class="text-btn product-edit-btn" type="button" data-product-id="${productId}">Edit</button><button class="text-btn product-image-btn" type="button" data-product-id="${productId}">${product.image_url ? "Change image" : "Upload image"}</button><button class="text-btn product-delete-btn" type="button" data-product-id="${productId}">Delete</button>`
@@ -43,6 +45,7 @@ CrumbCo.renderProducts = (list = CrumbCo.products) => {
       })
       .join("") ||
     `<p class="muted empty-products">No products match your search.</p>`;
+  CrumbCo.applyProductImageFallbacks(CrumbCo.$("#product-cards"));
 };
 
 CrumbCo.initProducts = () => {
