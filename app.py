@@ -10,10 +10,10 @@ FRONTEND_DIR = Path(__file__).resolve().parent
 load_dotenv(FRONTEND_DIR / ".env")
 
 API_BASE_URL = os.getenv(
-    "API_BASE_URL", "http://127.0.0.1:5000/api"
+    "API_BASE_URL", "https://cafe-back-rfhn.onrender.com/api"
 ).strip().rstrip("/")
 if not API_BASE_URL:
-    raise RuntimeError("API_BASE_URL is required. Set it in frontend/.env.")
+    raise RuntimeError("API_BASE_URL is required. Set it in the environment.")
 
 app = Flask(
     __name__,
