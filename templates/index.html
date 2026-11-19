@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JE Café | Café Management System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}?v=31" />
+    <script>
+      window.CrumbCoConfig = { apiBaseUrl: {{ api_base_url|tojson }} };
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#email">Skip to main content</a>
+    {% include "auth/login.html" %}
+    {% include "app/shell.html" %}
+    {% include "app/components/modals.html" %}
+    {% include "shared/scripts.html" %}
+    {% if config.DEBUG %}
+    <script>
+      (() => {
+        let version;
+        const checkForChanges = async () => {
+          try {
+            const response = await fetch("/__dev/reload", { cache: "no-store" });
+            if (!response.ok) throw new Error("Reload check failed");
+            const data = await response.json();
+            if (version && version !== data.version) {
+              window.location.reload();
+              return;
+            }
+            version = data.version;
+          } catch (error) {
+            console.warn("Waiting for the development server to restart.", error);
+          }
+          window.setTimeout(checkForChanges, 1000);
+        };
+        checkForChanges();
+      })();
+    </script>
+    {% endif %}
+  </body>
+</html>

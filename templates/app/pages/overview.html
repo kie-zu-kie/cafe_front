@@ -1,0 +1,135 @@
+<section id="overview" class="page-section active-section">
+            <div class="welcome-row">
+              <div>
+                <h2>Here’s your café at a glance.</h2>
+                <p class="muted">Keep every good thing moving.</p>
+              </div>
+              <button class="primary-btn create-order-action" id="new-order-btn">
+                ＋ New order
+              </button>
+            </div>
+            <div class="stats-grid">
+              <article class="stat-card">
+                <div class="stat-top">
+                  <span>Sales today</span><span class="stat-icon green">↗</span>
+                </div>
+                <strong id="sales-today">₱0</strong
+                ><small class="positive">Revenue from orders today</small>
+              </article>
+              <article class="stat-card">
+                <div class="stat-top">
+                  <span>Orders today</span
+                  ><span class="stat-icon peach">▣</span>
+                </div>
+                <strong id="orders-today">0</strong
+                ><small class="positive">Orders placed today</small>
+              </article>
+              <article class="stat-card">
+                <div class="stat-top">
+                  <span>Avg. order value</span
+                  ><span class="stat-icon lavender">₱</span>
+                </div>
+                <strong id="average-order">₱0</strong
+                ><small class="positive">Average spend per order today</small>
+              </article>
+              <article class="stat-card">
+                <div class="stat-top">
+                  <span>Low stock items</span
+                  ><span class="stat-icon yellow">!</span>
+                </div>
+                <strong id="low-stock-count">0</strong
+                ><small class="warning" id="low-stock-caption">Ingredients below reorder level</small>
+                <div class="stock-bar" role="img" aria-label="Low stock ingredients"><span id="low-stock-bar"></span></div>
+              </article>
+            </div>
+            <div class="dashboard-grid">
+              <article class="panel chart-panel">
+                <div class="panel-heading">
+                  <div>
+                    <h3>Sales overview</h3>
+                    <p class="muted" id="sales-chart-caption">Revenue performance for the last 7 days</p>
+                  </div>
+                  <label class="sr-only" for="sales-period">Sales chart period</label>
+                  <select id="sales-period">
+                    <option value="7d">Last 7 days</option>
+                    <option value="month">This month</option>
+                  </select>
+                </div>
+                <div class="chart">
+                  <div class="y-labels" id="sales-chart-y-labels"></div>
+                  <div class="chart-area">
+                    <div class="chart-grid" aria-hidden="true"></div>
+                    <svg id="sales-chart-svg" viewBox="0 0 700 220" preserveAspectRatio="none" role="img" aria-label="Sales over the selected period">
+                      <defs>
+                        <linearGradient id="fill" x1="0" x2="0" y1="0" y2="1">
+                          <stop
+                            offset="0"
+                            stop-color="#df8769"
+                            stop-opacity=".25"
+                          />
+                          <stop
+                            offset="1"
+                            stop-color="#df8769"
+                            stop-opacity="0"
+                          />
+                        </linearGradient>
+                      </defs>
+                      <path class="area" id="sales-chart-area" d="" />
+                      <path class="line" id="sales-chart-line" d="" />
+                    </svg>
+                    <div class="x-labels" id="sales-chart-x-labels"></div>
+                  </div>
+                </div>
+              </article>
+              <article class="panel">
+                <div class="panel-heading">
+                  <div>
+                    <h3>Top products</h3>
+                    <p class="muted">By sales in the last 7 days</p>
+                  </div>
+                  <button class="text-btn" data-section-link="products">
+                    View all →
+                  </button>
+                </div>
+                <div id="top-products" class="product-list"></div>
+              </article>
+            </div>
+            <div class="bottom-grid">
+              <article class="panel">
+                <div class="panel-heading">
+                  <div>
+                    <h3>Recent orders</h3>
+                    <p class="muted">Orders that need your attention</p>
+                  </div>
+                  <button class="text-btn" data-section-link="orders">
+                    View all →
+                  </button>
+                </div>
+                <div class="table-wrap">
+                  <table>
+                    <caption class="sr-only">Recent orders and their current status</caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">ORDER</th>
+                        <th scope="col">CUSTOMER</th>
+                        <th scope="col">ITEMS</th>
+                        <th scope="col">TOTAL</th>
+                        <th scope="col">STATUS</th>
+                      </tr>
+                    </thead>
+                    <tbody id="recent-orders"></tbody>
+                  </table>
+                </div>
+              </article>
+              <article class="panel calendar-panel">
+                <div class="panel-heading">
+                  <div>
+                    <h3>Today’s schedule</h3>
+                    <p class="muted">Orders from today</p>
+                  </div>
+                  <span class="icon-btn" aria-hidden="true">•••</span>
+                </div>
+                <div id="schedule" class="schedule"></div>
+              </article>
+            </div>
+          </section>

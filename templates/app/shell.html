@@ -1,0 +1,15 @@
+<main id="app-view" class="app-shell hidden" aria-label="Café management">
+  {% include "app/components/sidebar.html" %}
+  <section class="content">
+    {% include "app/components/topbar.html" %}
+    <div class="page-content" id="main-content" tabindex="-1">
+      {% include "app/pages/overview.html" %}
+      {% include "app/pages/orders.html" %}
+      {% include "app/pages/products.html" %}
+      {% include "app/pages/inventory.html" %}
+      {% include "app/pages/customers.html" %}
+      {% include "app/pages/settings.html" %}
+      {% include "app/pages/reports.html" %}
+    </div>
+  </section>
+</main>

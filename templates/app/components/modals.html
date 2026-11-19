@@ -1,0 +1,240 @@
+<div
+      id="inventory-modal"
+      class="modal-backdrop hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="inventory-modal-title"
+      aria-describedby="inventory-modal-description"
+      tabindex="-1"
+    >
+      <div class="order-modal">
+        <div class="modal-header">
+          <div>
+            <p class="eyebrow">STOCK CONTROL</p>
+            <h2 id="inventory-modal-title">Add ingredient</h2>
+            <p class="muted" id="inventory-modal-description">Add a new ingredient to your inventory.</p>
+          </div>
+          <button
+            class="modal-close"
+            id="close-inventory-modal"
+            type="button"
+            aria-label="Close"
+          >
+            ×
+          </button>
+        </div>
+        <form id="add-ingredient-form">
+          <div class="form-grid">
+            <div class="form-field full">
+              <label for="ingredient-name">Ingredient name *</label
+              ><input
+                id="ingredient-name"
+                required
+                placeholder="e.g. Premium cocoa powder"
+              />
+            </div>
+            <div class="form-field">
+              <label for="ingredient-category">Category *</label
+              ><select id="ingredient-category" required>
+                <option>Dry goods</option>
+                <option>Dairy</option>
+                <option>Fillings</option>
+                <option>Produce</option>
+                <option>Packaging</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="ingredient-supplier">Supplier *</label
+              ><input
+                id="ingredient-supplier"
+                required
+                placeholder="e.g. Mill House"
+              />
+            </div>
+            <div class="form-field">
+              <label for="ingredient-on-hand">On hand *</label
+              ><input
+                id="ingredient-on-hand"
+                type="number"
+                min="0"
+                step="any"
+                required
+                placeholder="0"
+              />
+            </div>
+            <div class="form-field">
+              <label for="ingredient-unit">Unit *</label
+              ><input id="ingredient-unit" required placeholder="kg, pcs, L" />
+            </div>
+            <div class="form-field">
+              <label for="ingredient-reorder-level">Reorder level *</label
+              ><input
+                id="ingredient-reorder-level"
+                type="number"
+                min="0"
+                step="any"
+                required
+                placeholder="0"
+              />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="filter-btn" id="cancel-inventory" type="button">
+              Cancel</button
+            ><button class="primary-btn" type="submit">
+              Add ingredient <span>→</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+<div
+  id="reorder-modal"
+  class="modal-backdrop hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="reorder-modal-title"
+  aria-describedby="reorder-modal-description"
+  tabindex="-1"
+>
+  <div class="order-modal">
+    <div class="modal-header">
+      <div>
+        <p class="eyebrow">STOCK CONTROL</p>
+        <h2 id="reorder-modal-title">Ingredients to reorder</h2>
+        <p class="muted" id="reorder-modal-description">Order enough to reach each ingredient’s reorder level.</p>
+      </div>
+      <button class="modal-close" id="close-reorder-modal" type="button" aria-label="Close">×</button>
+    </div>
+    <div id="reorder-list" class="reorder-list"></div>
+    <div class="modal-footer">
+      <button class="primary-btn" id="close-reorder-modal-footer" type="button">Done</button>
+    </div>
+  </div>
+</div>
+
+<div
+      id="order-modal"
+      class="modal-backdrop hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="order-modal-title"
+      aria-describedby="order-modal-description"
+      tabindex="-1"
+    >
+      <div class="order-modal">
+        <div class="modal-header">
+          <div>
+            <p class="eyebrow">SALES & FULFILLMENT</p>
+            <h2 id="order-modal-title">Create new order</h2>
+            <p class="muted" id="order-modal-description">
+              Add the order details below. Required fields are marked with *.
+            </p>
+          </div>
+          <button
+            class="modal-close"
+            id="close-order-modal"
+            type="button"
+            aria-label="Close"
+          >
+            ×
+          </button>
+        </div>
+        <form id="new-order-form">
+          <div class="order-pos-layout">
+            <section class="order-catalog-pane" aria-labelledby="order-catalog-title">
+              <div class="order-pane-heading">
+                <h3 id="order-catalog-title">Choose products</h3>
+                <span class="muted">Tap a product to add it</span>
+              </div>
+              <label class="order-product-search">
+                <span aria-hidden="true">⌕</span>
+                <input
+                  id="order-product-search"
+                  type="search"
+                  placeholder="Search products..."
+                  aria-label="Search order products"
+                />
+              </label>
+              <div id="order-product-filters" class="order-product-filters" aria-label="Product categories"></div>
+              <div id="order-product-grid" class="order-product-grid"></div>
+            </section>
+            <aside class="order-cart-pane" aria-labelledby="order-cart-title">
+              <div class="order-pane-heading">
+                <h3 id="order-cart-title">Current order</h3>
+              </div>
+              <div class="form-field order-customer-field">
+                <label for="order-customer">Customer name *</label>
+                <input id="order-customer" required placeholder="e.g. Maria Santos" />
+              </div>
+              <div id="order-items" class="order-items" aria-live="polite"></div>
+              <p id="order-empty" class="order-empty">Choose products to start this order.</p>
+              <div class="order-cart-fields">
+                <div class="form-field">
+                  <label for="order-date">Pickup date *</label>
+                  <input id="order-date" type="date" required />
+                </div>
+                <div class="form-field">
+                  <label for="order-time">Pickup time *</label>
+                  <input id="order-time" type="time" value="11:00" required />
+                </div>
+                <div class="form-field">
+                  <label for="order-type">Fulfillment *</label>
+                  <select id="order-type">
+                    <option>Pickup</option>
+                    <option>Delivery</option>
+                    <option>Dine-in</option>
+                  </select>
+                </div>
+                <div class="form-field">
+                  <label for="order-payment">Payment status *</label>
+                  <select id="order-payment">
+                    <option>Unpaid</option>
+                    <option>Paid</option>
+                    <option>Partially paid</option>
+                  </select>
+                </div>
+                <div class="form-field order-notes-field">
+                  <label for="order-notes">Order notes</label>
+                  <textarea id="order-notes" rows="2" placeholder="Special instructions or allergies"></textarea>
+                </div>
+              </div>
+              <div class="payment-summary">
+                <div class="order-total">
+                  <span>Estimated total</span><strong id="order-total">₱0</strong>
+                </div>
+                <div class="paid-money-field">
+                  <label for="order-paid">Money paid *</label>
+                  <div class="money-input">
+                    <span>₱</span>
+                    <input id="order-paid" type="number" min="0" step="0.01" value="0" required placeholder="0.00" />
+                  </div>
+                </div>
+                <div class="change-row">
+                  <span id="payment-message" class="payment-message"></span>
+                  <span>Change</span><strong id="order-change">₱0</strong>
+                </div>
+              </div>
+            </aside>
+          </div>
+          <div class="modal-footer">
+            <button class="filter-btn" id="cancel-order" type="button">
+              Cancel</button
+            ><button class="primary-btn" type="submit">
+              Create order <span>→</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+<div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+<div id="system-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="system-modal-title" aria-describedby="system-modal-message" tabindex="-1">
+          <div class="order-modal system-modal-card">
+            <div class="modal-header"><div><p class="eyebrow" id="system-modal-eyebrow">NOTICE</p><h2 id="system-modal-title">JE Café</h2></div><button class="modal-close" id="system-modal-close" type="button" aria-label="Close">×</button></div>
+            <p id="system-modal-message" class="system-modal-message"></p>
+            <div id="system-modal-fields"></div>
+            <div class="modal-footer"><button class="filter-btn" id="system-modal-cancel" type="button">Cancel</button><button class="primary-btn" id="system-modal-confirm" type="button">OK</button></div>
+          </div>
+        </div>

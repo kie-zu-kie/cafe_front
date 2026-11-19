@@ -1,0 +1,43 @@
+<section id="inventory" class="page-section">
+            <div class="section-header">
+              <div>
+                <p class="eyebrow">STOCK CONTROL</p>
+                <h2>Inventory</h2>
+                <p class="muted">Know what you have before you start baking.</p>
+              </div>
+              <button class="primary-btn" id="add-ingredient-btn" type="button">
+                ＋ Add ingredient
+              </button>
+            </div>
+            <div class="inventory-summary">
+              <div><span>Inventory value</span><strong>₱0</strong></div>
+              <div>
+                <span>Items in stock</span
+                ><strong id="inventory-count">0</strong>
+              </div>
+              <button class="inventory-summary-action" id="inventory-low-btn" type="button">
+                <span>Needs reordering</span>
+                <strong id="inventory-low-count" class="warning-text">0 items</strong>
+                <small>View ingredients to order →</small>
+              </button>
+            </div>
+            <div class="panel table-panel">
+              <div class="table-wrap">
+                <table>
+                  <caption class="sr-only">Inventory levels and supplier details</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">INGREDIENT</th>
+                      <th scope="col">CATEGORY</th>
+                      <th scope="col">ON HAND</th>
+                      <th scope="col">REORDER LEVEL</th>
+                      <th scope="col">SUPPLIER</th>
+                      <th scope="col">STATUS</th>
+                      <th scope="col">ACTIONS</th>
+                    </tr>
+                  </thead>
+                  <tbody id="inventory-table"></tbody>
+                </table>
+              </div>
+            </div>
+          </section>

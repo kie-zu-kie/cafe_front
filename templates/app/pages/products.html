@@ -1,0 +1,64 @@
+<section id="products" class="page-section">
+            <div class="section-header">
+              <div>
+                <p class="eyebrow">CATALOG</p>
+                <h2>Products</h2>
+                <p class="muted">
+                  Manage your menu, pricing, and availability.
+                </p>
+              </div>
+              <button class="primary-btn" id="add-product-btn">
+                ＋ Add product
+              </button>
+            </div>
+            <div class="product-toolbar">
+              <label class="search-input product-search">
+                <span aria-hidden="true">⌕</span
+                ><input
+                  id="product-search"
+                  aria-label="Search products"
+                  aria-label="Search products"
+                  type="search"
+                  placeholder="Search products"
+                />
+              </label>
+              <div
+                class="product-filters"
+                role="group"
+                aria-label="Product categories"
+              >
+                <button
+                  class="filter-btn product-filter active"
+                  type="button"
+                  data-category="all"
+                >
+                  All products</button
+                ><button
+                  class="filter-btn product-filter"
+                  type="button"
+                  data-category="coffee"
+                >
+                  Coffee</button
+                ><button
+                  class="filter-btn product-filter"
+                  type="button"
+                  data-category="pastry"
+                >
+                  Pastries</button
+                ><button
+                  class="filter-btn product-filter"
+                  type="button"
+                  data-category="cookie"
+                >
+                  Cookies</button
+                ><button
+                  class="filter-btn product-filter"
+                  type="button"
+                  data-category="bread"
+                >
+                  Bread
+                </button>
+              </div>
+            </div>
+            <div id="product-cards"></div>
+          </section>

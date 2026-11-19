@@ -1,0 +1,23 @@
+<section id="settings" class="page-section">
+            <div class="section-header">
+              <div><p class="eyebrow">ADMINISTRATION</p><h2>Admin settings</h2><p class="muted">Manage cashier access for your café.</p></div>
+            </div>
+            <div class="dashboard-grid">
+              <article class="panel">
+                <div class="panel-heading"><div><h3>Add cashier account</h3><p class="muted">Cashiers can sign in and process orders.</p></div></div>
+                <form id="add-cashier-form" autocomplete="off">
+                  <div class="form-grid">
+                    <div class="form-field"><label for="cashier-name">Full name *</label><input id="cashier-name" name="name" required></div>
+                    <div class="form-field"><label for="cashier-username">Username *</label><input id="cashier-username" name="username" autocomplete="off" required></div>
+                    <div class="form-field"><label for="cashier-email">Email *</label><input id="cashier-email" name="email" type="email" required></div>
+                    <div class="form-field"><label for="cashier-password">Password *</label><input id="cashier-password" name="password" type="password" autocomplete="new-password" minlength="8" required></div>
+                  </div>
+                  <button class="primary-btn" type="submit">＋ Add cashier</button>
+                </form>
+              </article>
+              <article class="panel">
+                <div class="panel-heading"><div><h3>Account controls</h3><p class="muted">Deactivate access or reset a cashier password.</p></div></div>
+                <div class="table-wrap"><table><caption class="sr-only">Cashier accounts and access controls</caption><thead><tr><th scope="col">NAME</th><th scope="col">USERNAME</th><th scope="col">EMAIL</th><th scope="col">STATUS</th><th scope="col">ACTIONS</th></tr></thead><tbody id="cashiers-table"></tbody></table></div>
+              </article>
+            </div>
+          </section>
