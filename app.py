@@ -9,11 +9,16 @@ from flask import Flask, jsonify, render_template
 FRONTEND_DIR = Path(__file__).resolve().parent
 load_dotenv(FRONTEND_DIR / ".env")
 
-API_BASE_URL = os.getenv(
+configured_api_base_url = os.getenv(
     "API_BASE_URL", "https://cafe-back-rfhn.onrender.com/api"
 ).strip().rstrip("/")
-if not API_BASE_URL:
+if not configured_api_base_url:
     raise RuntimeError("API_BASE_URL is required. Set it in the environment.")
+API_BASE_URL = (
+    configured_api_base_url
+    if configured_api_base_url.endswith("/api")
+    else f"{configured_api_base_url}/api"
+)
 
 app = Flask(
     __name__,
