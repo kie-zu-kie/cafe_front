@@ -212,6 +212,10 @@ button {
   min-height: 100vh;
 }
 .sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
   width: 242px;
   background: #fff;
   border-right: 1px solid var(--line);
@@ -219,6 +223,7 @@ button {
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
+  overflow-y: auto;
 }
 .workspace-label {
   font-size: 9px;
