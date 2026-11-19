@@ -45,8 +45,10 @@
                 Show
               </button>
             </div>
-            <button class="primary-btn login-btn" type="submit">
-              Sign in <span>→</span>
+            <button class="primary-btn login-btn" type="submit" aria-busy="false">
+              <span id="login-button-label">Sign in</span>
+              <span class="login-btn-arrow" aria-hidden="true">→</span>
+              <span class="login-spinner hidden" aria-hidden="true"></span>
             </button>
           </form>
           <p class="demo-hint">Use the account credentials provided by your café administrator.</p>

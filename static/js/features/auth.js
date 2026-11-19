@@ -25,7 +25,13 @@ CrumbCo.initAuth = () => {
   CrumbCo.$("#login-form").addEventListener("submit", async (event) => {
     event.preventDefault();
     const button = event.target.querySelector("button[type='submit']");
+    const buttonLabel = button.querySelector("#login-button-label");
+    const originalLabel = buttonLabel.textContent;
     button.disabled = true;
+    button.setAttribute("aria-busy", "true");
+    buttonLabel.textContent = "Signing in...";
+    button.querySelector(".login-btn-arrow").classList.add("hidden");
+    button.querySelector(".login-spinner").classList.remove("hidden");
     try {
       const user = await CrumbCo.api("/login", {
         method: "POST",
@@ -47,6 +53,10 @@ CrumbCo.initAuth = () => {
       CrumbCo.showToast(error.message);
     } finally {
       button.disabled = false;
+      button.setAttribute("aria-busy", "false");
+      buttonLabel.textContent = originalLabel;
+      button.querySelector(".login-btn-arrow").classList.remove("hidden");
+      button.querySelector(".login-spinner").classList.add("hidden");
     }
   });
 

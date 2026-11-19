@@ -177,6 +177,29 @@ button {
   margin-top: 27px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+.login-btn:disabled {
+  cursor: wait;
+  opacity: 0.85;
+}
+.login-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ffffff66;
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: login-spinner-spin 0.7s linear infinite;
+}
+@keyframes login-spinner-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .login-spinner {
+    animation-duration: 1.5s;
+  }
 }
 .demo-hint {
   text-align: center;
